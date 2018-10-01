@@ -15,6 +15,8 @@ $ `cd js-script-ubuntu`;
 $ `sudo chmod +x *.sh`;
 * Passo 5 - Entrar como root:
 $ `sudo -s -H`
+* Passo 6 - Iniciar o script:
+$ `sh lemp-ubuntu-instalation.sh`
 
 
 
