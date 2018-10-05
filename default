@@ -2,9 +2,18 @@ server {
     listen 80 default_server;
     listen [::]:80 default_server;
 
-    root /var/www/laravel/public;
+    # Default root project
+    root /var/www/html;
+    
+    # laravel project test, é só descomentar a linha asseguir para testar Laravel o projecto ja foi instalado
+    # root /var/www/laravel/test/public;
+    
+    # laravel project test, ou descomente esta linha para o seu projecto principal
+    # root /var/www/laravel/explicador/public;
+   
     index index.php index.html index.htm index.nginx-debian.html;
 
+    # Colocar aqui o dominio ou ip do servidor
     server_name server_domain_or_IP;
 
     location / {
@@ -18,7 +27,7 @@ server {
     location ~ \.php$ {
                 try_files $uri =404;
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
-                fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+                fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
                 fastcgi_index index.php;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
                 include fastcgi_params;
