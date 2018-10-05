@@ -2,7 +2,7 @@ server {
     listen 80 default_server;
     listen [::]:80 default_server;
 
-    root /var/www/html;
+    root /var/www/laravel/public;
     index index.php index.html index.htm index.nginx-debian.html;
 
     server_name server_domain_or_IP;
@@ -11,10 +11,18 @@ server {
         try_files $uri $uri/ =404;
     }
 
+    #location ~ \.php$ {
+    #    include snippets/fastcgi-php.conf;
+    #   fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+    #}
     location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
-    }
+                try_files $uri =404;
+                fastcgi_split_path_info ^(.+\.php)(/.+)$;
+                fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+                fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                include fastcgi_params;
+        }
 
     location ~ /\.ht {
         deny all;
