@@ -19,15 +19,34 @@ $ `sudo -s -H`
 $ `sh lemp-ubuntu-instalation.sh`
 
 
+#  Notas
 
-## Notas: adicionar isto no script:
+* sudo nano /etc/php/7.0/fpm/php.ini
 
-* Instalacao do composer
-* Instalacao do nodejs
+Definir este valor e descomentar a linha
+	
 
-###### Ficheiro de teste do server com as linhas:
+cgi.fix_pathinfo=0
 
-<?php
-echo 'Php in the server is good';
-echo phpinfo();
-?>
+* Restart PHP 7.2 FPM
+
+sudo service php7.2-fpm restart
+
+#  =============================================
+#  Base de dados
+# ==============================================
+#
+# Criacao da base de dados
+# CREATE DATABASE explicadordb2018;
+# Criacao de User
+# CREATE USER 'explicador2018'@'localhost' IDENTIFIED BY 'new_password';
+
+# Permissoes na db
+# GRANT ALL ON explicadordb2018.* TO 'new_user'@'localhost';
+
+# Actualizar as permissoes
+# FLUSH PRIVILEGES;
+#
+# Para ver base de dados:
+# SHOW DATABASES;
+
