@@ -44,8 +44,10 @@ sudo certbot --nginx -d $domain1 -d $domain2;
 #Set up automatic certificate renewal
 sudo certbot renew --dry-run;
 
+echo
+echo
 echo "Parabés, O Certificado de segurança SSL para o seu site foi instalado com sucesso!";
-echo Já podes acessar via https://;
+echo Já podes acessar via https://$domain1;
 
 
 
