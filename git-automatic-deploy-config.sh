@@ -28,13 +28,14 @@ git init --bare;
 
 #nano hooks/post-receive;
 touch hooks/post-receive;
-echo #!/bin/bash                          >> hooks/post-receive;
+echo '#!/bin/bash                          >> hooks/post-receive';
 echo while read oldrev newrev ref         >> hooks/post-receive;
 echo do                                   >> hooks/post-receive;
-echo if [[ $ref =~ .*/master$ ]];         >> hooks/post-receive;
+echo 'if [[ $ref =~ .*/master$ ]];         >> hooks/post-receive';
 echo then                                 >> hooks/post-receive;
 echo echo "Master ref received.  Deploying master branch to production..." >> hooks/post-receive;
 echo git --work-tree=/var/www/html --git-dir=/home/ubuntu/$project checkout -f   >> hooks/post-receive;
+echo "else   >> hooks/post-receive";
 echo echo "Ref $ref successfully received.  Doing nothing: only the master branch may be deployed on this server." >> hooks/post-receive;
 echo fi                                   >> hooks/post-receive;
 echo done                                 >> hooks/post-receive;
