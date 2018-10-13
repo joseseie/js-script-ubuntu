@@ -73,7 +73,7 @@ sudo ln -s /usr/share/phpmyadmin /var/www/html;
 echo copiando p ficheiro de configurações;
 sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bk;
 sudo rm /etc/nginx/sites-available/default;
-sudo cp default /etc/nginx/sites-availables/;
+sudo cp default /etc/nginx/sites-available/;
 
 # =====================================================
 # Instalacao do composer
@@ -98,6 +98,7 @@ sudo composer create-project laravel/laravel /var/www/laravel/test;
 sudo chown -R :www-data /var/www/laravel/test;
 sudo chmod -R 775 /var/www/laravel/test/storage;
 sudo chmod -R 775 /var/www/laravel/test/bootstrap/cache;
+
 
 # Clonando o projecto explicador do github
 echo Agora vamos clonar o projecto que deseja hospedar no github;
