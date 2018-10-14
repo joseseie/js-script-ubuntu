@@ -108,6 +108,9 @@ echo colocar no directorio?:
 read dir;
 sudo git clone $repo /var/www/laravel/$dir;
 
+#instalando as dependencias
+composer install;
+
 # Permissoes para o Projecto explicador (actualize aqui para o seu projecto especifico)
 sudo chown -R :www-data /var/www/laravel/$dir
 sudo chmod -R 775 /var/www/laravel/$dir/storage
