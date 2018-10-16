@@ -120,6 +120,21 @@ sudo chmod -R 775 /var/www/laravel/$dir/storage
 sudo chmod -R 775 /var/www/laravel/$dir/bootstrap/cache;
 
 # ====================================================
+# Instalacao do supervisor, para correr o queue:work
+# ====================================================
+
+sudo apt-get install supervisor;
+
+# Copiando o ficheiro de configurações
+cp /home/ubuntu/js-script-ubuntu/laravel-worker.conf /etc/supervisor/conf.d/;
+
+#Starting Supervisor
+sudo supervisorctl reread;
+sudo supervisorctl update;
+sudo supervisorctl start laravel-worker:*;
+
+
+# ====================================================
 # Reiniciando nginx
 # ====================================================
 
