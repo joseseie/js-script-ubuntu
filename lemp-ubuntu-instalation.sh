@@ -108,6 +108,9 @@ echo colocar no directorio?:
 read dir;
 sudo git clone $repo /var/www/laravel/$dir;
 
+#Entrando no dir do projecto clonado
+cd /var/www/laravel/$dir
+
 #instalando as dependencias
 composer install;
 
