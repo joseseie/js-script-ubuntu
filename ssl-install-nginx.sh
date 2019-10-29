@@ -4,6 +4,18 @@
 # Org: Explicador Inc
 # Author: Explicador Inc
 # PRE REQUISITIES: 
+# Step 1 – INSTALLING NGINX
+# sudo apt update
+# sudo apt install nginx
+# Step 2 – ADJUSTING THE FIREWALL
+# sudo ufw status
+# sudo ufw enable
+# sudo ufw status
+# sudo ufw allow 'Nginx HTTP'
+# sudo ufw allow 'openssh'
+# sudo ufw status
+# Step 3 – CHECKING YOUR WEB SERVER 
+# systemctl status nginx
 #1. Edit your: 
 #sudo nano /etc/nginx/sites-available/default
 #2. Add the server name: 
