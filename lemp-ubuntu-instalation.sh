@@ -39,7 +39,7 @@ sudo apt install php-fpm php-mysql;
 # Instalacao dos repositorios de terceiros,...
 sudo apt install software-properties-common;
 sudo add-apt-repository ppa:ondrej/php;
-apt-get install python-software-properties;
+sudo apt install python-software-properties;
 
 # Instalacao de php 7.2
 sudo apt update;
@@ -47,14 +47,14 @@ sudo apt install php7.2-fpm;
 
 sudo apt-get install php7.2-cli php7.2-fpm php7.2-curl php7.2-gd php7.2-mysql php7.2-mbstring zip unzip;
 
-apt-get update;
-apt-get -y install unzip zip php7.2 php7.2-mysql php7.2-fpm php7.2-mbstring php7.2-xml php7.2-curl php7.2-xml php-dev php-pear libmcrypt-dev;
+sudo apt update;
+sudo apt -y install unzip zip php7.2 php7.2-mysql php7.2-fpm php7.2-mbstring php7.2-xml php7.2-curl php7.2-xml php-dev php-pear libmcrypt-dev;
 
 # ====================================================
 # Definindo PHP 7.2 como default
 # ====================================================
 
-update-alternatives --set php /usr/bin/php7.2;
+sudo update-alternatives --set php /usr/bin/php7.2;
 
 # ====================================================
 # Instalacao do PHP myAdmin
@@ -80,7 +80,7 @@ sudo cp default /etc/nginx/sites-available/;
 # =====================================================
 
 cd ~;
-curl -sS https://getcomposer.org/installer | php;
+sudo curl -sS https://getcomposer.org/installer | php;
 sudo mv composer.phar /usr/local/bin/composer;
 
 # =====================================================
@@ -88,7 +88,7 @@ sudo mv composer.phar /usr/local/bin/composer;
 # =====================================================
 echo "Asseguir vai criar o directório /var/www/laravel e criar um Projecto laravel com o nome test"
 # Criacao de pasta Laravel no /var/www/
-mkdir -p /var/www/laravel;
+sudo mkdir -p /var/www/laravel;
 
 # Criar um novo projecto Laravel para testes
 sudo composer create-project laravel/laravel /var/www/laravel/test;
@@ -123,7 +123,7 @@ sudo chmod -R 775 /var/www/laravel/$dir/bootstrap/cache;
 # Instalacao do supervisor, para correr o queue:work
 # ====================================================
 
-sudo apt-get install supervisor;
+sudo apt install supervisor;
 
 # Copiando o ficheiro de configurações
 cp /home/ubuntu/js-script-ubuntu/laravel-worker.conf /etc/supervisor/conf.d/;
@@ -139,7 +139,6 @@ sudo supervisorctl start laravel-worker:*;
 # ====================================================
 
 sudo service php7.2-fpm restart;
-sudo service nginx reload;
 sudo service nginx restart;
 
 # =====================================================
@@ -159,7 +158,7 @@ echo NOTA 2: Não esquece de definir permissões de Leitura ao seu projecto Lara
 echo NOTA 3: Use este comando: sudo nano /etc/php/7.2/fpm/php.ini;
 echo "Descomente e atribui valor zero (0) na linha 'cgi.fix_pathinfo' como vês asseguir: ";
 echo cgi.fix_pathinfo=0;
-echo Depois reiniciar: sudo service php7.0-fpm restart;
+echo Depois reiniciar: sudo service php7.2-fpm restart;
 echo;
 echo Pode testar o servidor da seguinte forma:;
 echo "http://your_server_domain_or_IP/info.php";
