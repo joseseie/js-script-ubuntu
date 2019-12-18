@@ -19,7 +19,7 @@ $ `sudo -s -H`
 $ `sh lemp-ubuntu-instalation.sh`
 
 
-#  Notas
+##  Notas
 
 * sudo nano /etc/php/7.0/fpm/php.ini
 
@@ -32,21 +32,37 @@ cgi.fix_pathinfo=0
 
 sudo service php7.2-fpm restart
 
-#  =============================================
-#  Base de dados
-# ==============================================
-#
-# Criacao da base de dados
-# CREATE DATABASE explicadordb2018;
-# Criacao de User
-# CREATE USER 'explicador2018'@'localhost' IDENTIFIED BY 'new_password';
+####  =============================================
+####  Base de dados
+#### ==============================================
 
-# Permissoes na db
-# GRANT ALL ON explicadordb2018.* TO 'new_user'@'localhost';
+### 1. Login:
+```
+sudo mysql -u root //sem senha no root
+mysql -u root -p // com senha na conta root
+```
 
-# Actualizar as permissoes
-# FLUSH PRIVILEGES;
-#
-# Para ver base de dados:
-# SHOW DATABASES;
+### 2. Criação da base de dados
+```
+CREATE DATABASE explicadordb2018;
+```
+### 3. Criação de User
+```
+CREATE USER 'explicador2018'@'localhost' IDENTIFIED BY 'new_password';
+```
 
+### 4. Permissoes na db
+```
+GRANT ALL ON explicadordb2018.* TO 'new_user'@'localhost';
+```
+
+### 5. Actualizar as permissoes
+ ```
+ FLUSH PRIVILEGES;
+```
+
+
+# 6. Para ver base de dados (opcional):
+```
+SHOW DATABASES;
+```
