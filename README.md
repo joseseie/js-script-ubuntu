@@ -32,9 +32,7 @@ cgi.fix_pathinfo=0
 
 sudo service php7.2-fpm restart
 
-####  =============================================
-####  Base de dados
-#### ==============================================
+## Base de dados
 
 ### 1. Login:
 ```
