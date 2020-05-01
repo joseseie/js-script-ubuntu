@@ -36,19 +36,19 @@ fi
 #developers maintain a Ubuntu software repository with up-to-date versions, so we'll use that repository instead.
 sudo add-apt-repository ppa:certbot/certbot;
 
-sudo apt-get update;
+sudo apt update;
 
-sudo apt-get install python-certbot-nginx;
+sudo apt install python-certbot-nginx;
 
 #Allowing HTTPS Through the Firewall
 sudo ufw allow 'Nginx Full';
 sudo ufw delete allow 'Nginx HTTP';
 
-#Obtaining an SSL Certificate
-echo escrava o nome do seu dominio principal, sem www;
+# Requesting domain name from user:
+echo ESCREVA O NOME DO SEU DOMÍNIO PRINCIPAL, SEM WWW:;
 read domain1;
-echo escrava o nome do seu dominio com www;
-read domain2;
+
+#Obtaining an SSL Certificate
 sudo certbot --nginx -d $domain1 -d $domain2;
 
 
@@ -58,7 +58,7 @@ sudo certbot renew --dry-run;
 
 echo
 echo
-echo "Parabés, O Certificado de segurança SSL para o seu site foi instalado com sucesso!";
+echo "PARABÉNS, O CERTIFICADO DE SEGURANÇA PARA O SEU SITE FOI INSTALADO COM SUCESSO!";
 echo Já podes acessar via https://$domain1;
 
 
