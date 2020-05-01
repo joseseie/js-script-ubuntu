@@ -46,10 +46,10 @@ sudo ufw delete allow 'Nginx HTTP';
 
 # Requesting domain name from user:
 echo ESCREVA O NOME DO SEU DOMÍNIO PRINCIPAL, SEM WWW:;
-read domain1;
+read domain;
 
 #Obtaining an SSL Certificate
-sudo certbot --nginx -d $domain1 -d $domain2;
+sudo certbot --nginx -d $domain -d www.$domain;
 
 
 #Activing renew process
