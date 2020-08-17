@@ -21,7 +21,7 @@ $ `sh lemp-ubuntu-instalation.sh`
 
 ##  Notas
 
-* sudo nano /etc/php/7.0/fpm/php.ini
+* sudo nano /etc/php/7.2/fpm/php.ini
 
 Definir este valor e descomentar a linha
 	
@@ -42,16 +42,16 @@ mysql -u root -p // com senha na conta root
 
 ### 2. Criação da base de dados
 ```
-CREATE DATABASE explicadordb2018;
+CREATE DATABASE d_name;
 ```
 ### 3. Criação de User
 ```
-CREATE USER 'explicador2018'@'localhost' IDENTIFIED BY 'new_password';
+CREATE USER 'd_name'@'localhost' IDENTIFIED BY 'new_password';
 ```
 
 ### 4. Permissoes na db
 ```
-GRANT ALL ON explicadordb2018.* TO 'new_user'@'localhost';
+GRANT ALL ON d_name.* TO 'new_user'@'localhost';
 ```
 
 ### 5. Actualizar as permissoes
