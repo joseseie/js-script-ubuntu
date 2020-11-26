@@ -41,20 +41,20 @@ sudo apt install software-properties-common;
 sudo add-apt-repository ppa:ondrej/php;
 sudo apt install python-software-properties;
 
-# Instalacao de php 7.2
+# Instalacao de php 7.4
 sudo apt update;
-sudo apt install php7.2-fpm;
+sudo apt install php7.4-fpm;
 
-sudo apt-get install php7.2-cli php7.2-fpm php7.2-curl php7.2-gd php7.2-mysql php7.2-mbstring zip unzip;
+sudo apt-get install php7.4-cli php7.4-fpm php7.4-curl php7.4-gd php7.4-mysql php7.4-mbstring zip unzip;
 
 sudo apt update;
-sudo apt -y install unzip zip php7.2 php7.2-mysql php7.2-fpm php7.2-mbstring php7.2-xml php7.2-curl php7.2-xml php-dev php-pear libmcrypt-dev;
+sudo apt -y install unzip zip php7.4 php7.4-mysql php7.4-fpm php7.4-mbstring php7.4-xml php7.4-curl php7.4-xml php-dev php-pear libmcrypt-dev;
 
 # ====================================================
-# Definindo PHP 7.2 como default
+# Definindo PHP 7.4 como default
 # ====================================================
 
-sudo update-alternatives --set php /usr/bin/php7.2;
+sudo update-alternatives --set php /usr/bin/php7.4;
 
 # ====================================================
 # Instalacao do PHP myAdmin
