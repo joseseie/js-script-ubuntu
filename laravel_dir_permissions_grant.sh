@@ -25,6 +25,15 @@ echo "Indique o caminho completo da pasta do seu projecto, exemplo: /var/www/mys
 echo "Pode entrar na pasta raíz do seu projecto, depois executar o comando: 'pwd', poderá ver o caminho completo.";
 read myProjectDirPath;
 
+echo "O caminho lido eh: ";
+echo $myProjectDirPath;
+
+echo;
+echo;
+echo "Configurando as permissões, aguarde...";
+echo;
+echo;
+
 # 1. Tornando proprietário ao webserser user
 sudo chown -R www-data:www-data $myProjectDirPath;
 
