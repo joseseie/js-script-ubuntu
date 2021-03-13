@@ -23,7 +23,7 @@ fi
 # Clonando o projecto explicador do github
 echo "Indique o caminho completo da pasta do seu projecto, exemplo: /var/www/myserver/ProjectDir";
 echo "Pode entrar na pasta raíz do seu projecto, depois executar o comando: 'pwd', poderá ver o caminho completo.";
-read $myProjectDirPath;
+read myProjectDirPath;
 
 # 1. Tornando proprietário ao webserser user
 sudo chown -R www-data:www-data $myProjectDirPath;
