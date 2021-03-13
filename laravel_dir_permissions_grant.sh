@@ -36,12 +36,12 @@ sudo usermod -a -G www-data ubuntu;
 sudo find $myProjectDirPath -type f -exec chmod 644 {} \; 
 
 # Permissões para as pastas
-sudo find /path/to/your/laravel/root/directory -type d -exec chmod 755 {} \;
+sudo find $myProjectDirPath -type d -exec chmod 755 {} \;
 
 # 4. Entrando no dir do projecto
 cd $myProjectDirPath;
 
-# 5. Tornando o meu user actual proprietário de www-data
+# 5. Tornando o user actual proprietário de www-data
 sudo chown -R $USER:www-data .
 
 # 6. Permissões para o meu user e para o web-server
