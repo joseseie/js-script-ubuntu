@@ -38,7 +38,7 @@ sudo add-apt-repository ppa:certbot/certbot;
 
 sudo apt update;
 
-sudo apt install python-certbot-nginx;
+sudo apt install python3-certbot-nginx;
 
 #Allowing HTTPS Through the Firewall
 sudo ufw allow 'Nginx Full';
