@@ -50,6 +50,16 @@ sudo apt-get install php7.4-cli php7.4-fpm php7.4-curl php7.4-gd php7.4-mysql ph
 sudo apt update;
 sudo apt -y install unzip zip php7.4 php7.4-mysql php7.4-fpm php7.4-mbstring php7.4-xml php7.4-curl php7.4-xml php-dev php-pear libmcrypt-dev;
 
+# Instalacao de php 8.0
+sudo apt update;
+sudo apt install php8.0-fpm;
+
+sudo apt-get install php8.0-cli php8.0-fpm php8.0-curl php8.0-gd php8.0-mysql php8.0-mbstring zip unzip;
+
+sudo apt update;
+sudo apt -y install unzip zip php8.0 php8.0-mysql php8.0-fpm php8.0-mbstring php8.0-xml php8.0-curl php8.0-xml php-dev php-pear libmcrypt-dev;
+
+
 # ====================================================
 # Definindo PHP 7.4 como default
 # ====================================================
@@ -60,8 +70,8 @@ sudo update-alternatives --set php /usr/bin/php7.4;
 # Instalacao do PHP myAdmin
 # ====================================================
 
-sudo apt-get update;
-sudo apt-get install phpmyadmin;
+sudo apt update;
+sudo apt install phpmyadmin;
 
 # Criando o link
 sudo ln -s /usr/share/phpmyadmin /var/www/html;
@@ -83,42 +93,6 @@ cd ~;
 sudo curl -sS https://getcomposer.org/installer | php;
 sudo mv composer.phar /usr/local/bin/composer;
 
-# =====================================================
-# Instalacao do projecto Laravel para testes
-# =====================================================
-echo "Asseguir vai criar o directório /var/www/laravel e criar um Projecto laravel com o nome test"
-# Criacao de pasta Laravel no /var/www/
-sudo mkdir -p /var/www/laravel;
-
-# Criar um novo projecto Laravel para testes
-sudo composer create-project laravel/laravel /var/www/laravel/test;
-
-
-# ===> Permissões ao directório d Projecto:
-sudo chown -R :www-data /var/www/laravel/test;
-sudo chmod -R 775 /var/www/laravel/test/storage;
-sudo chmod -R 775 /var/www/laravel/test/bootstrap/cache;
-
-
-# Clonando o projecto explicador do github
-echo Agora vamos clonar o projecto que deseja hospedar no github;
-echo link do repositório:;
-read repo;
-echo colocar no directorio?:
-read dir;
-sudo git clone $repo /var/www/laravel/$dir;
-
-#Entrando no dir do projecto clonado
-cd /var/www/laravel/$dir
-
-#instalando as dependencias
-composer install;
-
-# Permissoes para o Projecto explicador (actualize aqui para o seu projecto especifico)
-sudo chown -R :www-data /var/www/laravel/$dir
-sudo chmod -R 775 /var/www/laravel/$dir/storage
-sudo chmod -R 775 /var/www/laravel/$dir/bootstrap/cache;
-
 # ====================================================
 # Instalacao do supervisor, para correr o queue:work
 # ====================================================
@@ -138,7 +112,7 @@ sudo supervisorctl start laravel-worker:*;
 # Reiniciando nginx
 # ====================================================
 
-sudo service php7.2-fpm restart;
+sudo service php7.4-fpm restart;
 sudo service nginx restart;
 
 # =====================================================
@@ -153,47 +127,9 @@ echo "phpinfo();" >> /var/www/html/info.php;
 echo;
 echo;
 echo Instalação concluida com sucesso!!;
-echo NOTA 1: Não esquece de actualizar o 'server name', no: /etc/nginx/sites-availables/default;
-echo NOTA 2: Não esquece de definir permissões de Leitura ao seu projecto Laravel;
-echo NOTA 3: Use este comando: sudo nano /etc/php/7.2/fpm/php.ini;
-echo "Descomente e atribui valor zero (0) na linha 'cgi.fix_pathinfo' como vês asseguir: ";
-echo cgi.fix_pathinfo=0;
-echo Depois reiniciar: sudo service php7.2-fpm restart;
+echo NOTA: Não esquece de actualizar o 'server name', no: /etc/nginx/sites-availables/default;
 echo;
 echo Pode testar o servidor da seguinte forma:;
 echo "http://your_server_domain_or_IP/info.php";
 echo Esse é o seu ip:;
 curl -4 icanhazip.com;
-
-# ==========================================
-# === Notas
-# ==========================================
-# sudo nano /etc/php/7.0/fpm/php.ini
-#
-# Definir este valor e descomentar a linha
-#	
-# cgi.fix_pathinfo=0
-
-# Restart PHP 7.2 FPM
-# sudo service php7.2-fpm restart
-
-#  =============================================
-#  Base de dados
-# ==============================================
-#
-# Criacao da base de dados
-# CREATE DATABASE explicadordb2018;
-# Criacao de User
-# CREATE USER 'explicador2018'@'localhost' IDENTIFIED BY 'new_password';
-
-# Permissoes na db
-# GRANT ALL ON explicadordb2018.* TO 'new_user'@'localhost';
-
-# Actualizar as permissoes
-# FLUSH PRIVILEGES;
-#
-# Para ver base de dados:
-# SHOW DATABASES;
-
-
-
