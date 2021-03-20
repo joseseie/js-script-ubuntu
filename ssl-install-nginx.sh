@@ -57,9 +57,17 @@ sudo certbot --nginx -d $domain -d www.$domain;
 sudo certbot renew --dry-run;
 
 echo
+sudo ln -s /etc/nginx/sites-available/$domain /etc/nginx/sites-enabled/
+sudo service nginx restart
+echo
+echo
 echo
 echo "PARABÉNS, O CERTIFICADO DE SEGURANÇA PARA O SEU SITE FOI INSTALADO COM SUCESSO!";
 echo Já podes acessar via https://$domain1;
+echo
+echo
+echo
+echo
 
 
 
