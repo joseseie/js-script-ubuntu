@@ -63,7 +63,7 @@ echo
 echo
 echo
 echo "PARABÉNS, O CERTIFICADO DE SEGURANÇA PARA O SEU SITE FOI INSTALADO COM SUCESSO!";
-echo Já podes acessar via https://$domain1;
+echo Já podes acessar via https://$domain;
 echo
 echo
 echo
