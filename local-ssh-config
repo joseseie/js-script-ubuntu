@@ -1,0 +1,5 @@
+host explicador-server
+        IdentityFile    ~/perm-file-key-or-path.pem
+        User            ubuntu
+        HostName        3.65.34.186
+        IdentitiesOnly  yes
