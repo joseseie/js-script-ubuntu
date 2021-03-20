@@ -1,4 +1,9 @@
 #!/bin/bash
+
+# SAVE THIS SCCRIPT AT:
+# /home/ubuntu/myrepo.git/hooks/post-receive
+# Don't forget to put correct paths
+
 TARGET="/var/www/admin.explicador.co.mz/html/"
 GIT_DIR="/home/ubuntu/admin.explicador.co.mz-bare.git"
 
