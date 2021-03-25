@@ -48,22 +48,25 @@ sudo ufw delete allow 'Nginx HTTP';
 echo ESCREVA O NOME DO SEU DOMÍNIO PRINCIPAL, SEM WWW:;
 read domain;
 
-#Obtaining an SSL Certificate
-sudo certbot --nginx -d $domain -d www.$domain;
+# Criando symbolic link do domínio no caso de não se ter criado ainda;
+sudo ln -s /etc/nginx/sites-available/$domain /etc/nginx/sites-enabled/
+sudo service nginx restart
 
+#Obtendo o Certificado SSL
+sudo certbot --nginx -d $domain -d www.$domain;
 
 #Activing renew process
 #Set up automatic certificate renewal
 sudo certbot renew --dry-run;
 
-echo
-sudo ln -s /etc/nginx/sites-available/$domain /etc/nginx/sites-enabled/
+# Reiniciando o nginx
 sudo service nginx restart
-echo
+
 echo
 echo
 echo "PARABÉNS, O CERTIFICADO DE SEGURANÇA PARA O SEU SITE FOI INSTALADO COM SUCESSO!";
 echo Já podes acessar via https://$domain;
+echo
 echo
 echo
 echo
