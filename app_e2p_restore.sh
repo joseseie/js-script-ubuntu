@@ -7,13 +7,46 @@ if [ "$(id -u)" != "0" ]; then
    exit 1
 fi
 
-Script de restore da db: app_e2p_restore.sh
+# Script de restore da db: app_e2p_restore.sh
 
-# 1 - Importação da base de dados
-cd /var/backups/backup-e2payments-platform4; #Por Ler Esse caminho
+# ==================================
+# === Leitura das variáveis ========
+# ==================================
+
+echo "BEM VINDO AO SCRIPT DE RESTAURAÇÃO DE BACKUP!"
+echo "A seguir, vamos ler as seguintes informações:"
+echo "1. Caminho do projecto que está em produção;"
+echo "2. Caminho do repositório que armazena os backups;"
+echo "3. O nome do backup que se deseja restaurar;"
+echo "4. O nome da base de dados a ser recriada;"
+echo "* Precisará de ter a senha da sua db próximo."
+
+# Esse código vais e imprimir no console durante a execução
+echo # ==================================
+echo # === Leitura das variáveis ========
+echo # ==================================
+
+# Ler o caminho do projecto local:
+echo 1. ESCREVA O CAMINHO COMPLETO ATÉ AO PROJECTO, INCLUINDO A PASTA 'production';
+read main_project_path;
+
+echo 2. ESCREVA O CAMINHO COMPLETO ATÉ AO REPOSITÓRIO DE BACKUPS;
+read backup_repo_path;
+
+echo 3. ESCREVA O NOME DO BACKUP QUE DESEJA RESTAURAR, POR EXEMPLO: '2021-05-11-16-40-05.zip';
+read backup_file_to_restore;
+
+echo 4. ESCREVA O NOME DA BASE DE DADOS DESEJA RESTAURAR, POR EXEMPLO: 'my_db_name_example';
+read db_name;
+
+
+# ==================================
+# == Início de execução do script ==
+# ==================================
+
+# 1 e 2 - Importação do último backup a partir do repositório
+cd $backup_repo_path; #Por Ler Esse caminho
 sudo git pull;
-
-# 2 - Fazer o push
 sudo git push
 
 # 3 - Restaurar o backup localmente
@@ -21,28 +54,28 @@ sudo git push
 sudo mysql -u root -p #or sudo mysql -u root //sem senha
 
 # 3.2 - Deletar a base de dados
-mysql> drop database e2paymetntssecrets1234; #Por guardar na variável
-mysql> create database e2paymetntssecrets1234;
-Mysql> exit;
+drop database $db_name; #Por guardar na variável
+create database $db_name;
+exit;
 
 # 3.3 - Extrair os ficheiros do backups 
-sudo unzip /var/backups/backup-e2payments-platform4/e2Payments/2021-05-11-16-40-05.zip -d /var/restore/ #Por guardar o file name na variável
+sudo unzip $backup_repo_path/e2Payments/$backup_file_to_restore -d /var/restore/ #Por guardar o file name na variável
 
 # 3.4 - Restauração(copia) do Storage:
-sudo cp -r /var/restore/var/www/e2payments.explicador.co.mz/production/storage/* /var/www/e2payments.explicador.co.mz/production/storage
+sudo cp -r /var/restore/$main_project_path/storage/* $main_project_path/storage
 
 # 3.5 - Actualização das permissões do dir storage:
-sudo chmod 777 /var/www/e2payments.explicador.co.mz/production/storage/ -R
+sudo chmod 777 $main_project_path/storage/ -R
 
 #  3.6 - Restauração da base de dados:
-mysql -u e2paymetntssecrets1234 -p e2paymetntssecrets1234 < /var/restore/db-dumps/mysql-e2paymetntssecrets1234.sql;
+mysql -u $db_name -p $db_name < /var/restore/db-dumps/mysql-$db_name.sql;
 
 # 3.7 - Fazer o backup
-cd /var/www/e2payments.explicador.co.mz/production
+cd $main_project_path
 sudo php artisan backup:run
 
 # 3.8 - Fazer commit e push
-cd /var/backups/backup-e2payments-platform4 #caminho do file do backup
+cd $backup_repo_path #caminho do file do backup
 sudo git add .
 sudo git commit -m 'backup(App): Backup realizado pelo script'
 sudo git push
