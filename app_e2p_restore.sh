@@ -54,9 +54,9 @@ sudo git push
 sudo mysql -u root -p #or sudo mysql -u root //sem senha
 
 # 3.2 - Deletar a base de dados
-drop database $db_name; #Por guardar na variável
-create database $db_name;
-exit;
+# drop database $db_name; #Por guardar na variável
+# create database $db_name;
+# exit;
 
 # 3.3 - Extrair os ficheiros do backups 
 sudo unzip $backup_repo_path/e2Payments/$backup_file_to_restore -d /var/restore/ #Por guardar o file name na variável
