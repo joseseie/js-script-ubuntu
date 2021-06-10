@@ -1,29 +1,5 @@
 #!/bin/bash
-# Instalation OF SSL Certificate ON YOUR SERVER
-# VERSION 1.0 October 10 2018
-# Org: Explicador Inc
-# Author: Explicador Inc
-# PRE REQUISITIES: 
-# Step 1 – INSTALLING NGINX
-# sudo apt update
-# sudo apt install nginx
-# Step 2 – ADJUSTING THE FIREWALL
-# sudo ufw status
-# sudo ufw enable
-# sudo ufw status
-# sudo ufw allow 'Nginx HTTP'
-# sudo ufw allow 'openssh'
-# sudo ufw status
-# Step 3 – CHECKING YOUR WEB SERVER 
-# systemctl status nginx
-#1. Edit your: 
-#sudo nano /etc/nginx/sites-available/default
-#2. Add the server name: 
-#server_name example.com www.example.com;
-#3. You Can Test your configs: 
-#sudo nginx -t
-#4. Restart Nginx:
-#sudo systemctl reload nginx
+# Restaura o backup da plataforma e2payments
 
 # Script validation checks
 if [ "$(id -u)" != "0" ]; then
@@ -31,43 +7,51 @@ if [ "$(id -u)" != "0" ]; then
    exit 1
 fi
 
-#Installing Certbot
-#Certbot is in very active development, so the Certbot packages provided by Ubuntu tend to be outdated. However, the Certbot 
-#developers maintain a Ubuntu software repository with up-to-date versions, so we'll use that repository instead.
-sudo add-apt-repository ppa:certbot/certbot;
+Script de restore da db: app_e2p_restore.sh
 
-sudo apt update;
+# 1 - Importação da base de dados
+cd /var/backups/backup-e2payments-platform4; #Por Ler Esse caminho
+sudo git pull;
 
-sudo apt install python3-certbot-nginx;
+# 2 - Fazer o push
+sudo git push
 
-#Allowing HTTPS Through the Firewall
-sudo ufw allow 'Nginx Full';
-sudo ufw delete allow 'Nginx HTTP';
+# 3 - Restaurar o backup localmente
+# 3.1 - Fazer login no mysql
+sudo mysql -u root -p #or sudo mysql -u root //sem senha
 
-# Requesting domain name from user:
-echo ESCREVA O NOME DO SEU DOMÍNIO PRINCIPAL, SEM WWW:;
-read domain;
+# 3.2 - Deletar a base de dados
+mysql> drop database e2paymetntssecrets1234; #Por guardar na variável
+mysql> create database e2paymetntssecrets1234;
+Mysql> exit;
 
-# Criando symbolic link do domínio no caso de não se ter criado ainda;
-sudo ln -s /etc/nginx/sites-available/$domain /etc/nginx/sites-enabled/
-sudo service nginx restart
+# 3.3 - Extrair os ficheiros do backups 
+sudo unzip /var/backups/backup-e2payments-platform4/e2Payments/2021-05-11-16-40-05.zip -d /var/restore/ #Por guardar o file name na variável
 
-#Obtendo o Certificado SSL
-sudo certbot --nginx -d $domain -d www.$domain;
+# 3.4 - Restauração(copia) do Storage:
+sudo cp -r /var/restore/var/www/e2payments.explicador.co.mz/production/storage/* /var/www/e2payments.explicador.co.mz/production/storage
 
-#Activing renew process
-#Set up automatic certificate renewal
-sudo certbot renew --dry-run;
+# 3.5 - Actualização das permissões do dir storage:
+sudo chmod 777 /var/www/e2payments.explicador.co.mz/production/storage/ -R
 
-# Reiniciando o nginx
-sudo service nginx restart
+#  3.6 - Restauração da base de dados:
+mysql -u e2paymetntssecrets1234 -p e2paymetntssecrets1234 < /var/restore/db-dumps/mysql-e2paymetntssecrets1234.sql;
+
+# 3.7 - Fazer o backup
+cd /var/www/e2payments.explicador.co.mz/production
+sudo php artisan backup:run
+
+# 3.8 - Fazer commit e push
+cd /var/backups/backup-e2payments-platform4 #caminho do file do backup
+sudo git add .
+sudo git commit -m 'backup(App): Backup realizado pelo script'
+sudo git push
 
 echo
 echo
-echo "PARABÉNS, O CERTIFICADO DE SEGURANÇA PARA O SEU SITE FOI INSTALADO COM SUCESSO!";
-echo Já podes acessar via https://$domain;
 echo
 echo
+echo "PARABÉNS, O BACKUP FOI RESTAURADO COM SUCESSO!";
 echo
 echo
 echo
