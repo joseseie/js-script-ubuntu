@@ -62,7 +62,8 @@ sudo mysql -u root -p #or sudo mysql -u root //sem senha
 sudo unzip $backup_repo_path/e2Payments/$backup_file_to_restore -d /var/restore/ #Por guardar o file name na variável
 
 # 3.4 - Restauração(copia) do Storage:
-sudo cp -r /var/restore/$main_project_path/storage/* $main_project_path/storage
+sudo rm -r $main_project_path/storage
+sudo cp -r /var/restore/$main_project_path/storage $main_project_path
 
 # 3.5 - Actualização das permissões do dir storage:
 sudo chmod 777 $main_project_path/storage/ -R
