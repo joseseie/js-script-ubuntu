@@ -57,6 +57,22 @@ sudo mysql -u root -p #or sudo mysql -u root //sem senha
 mysql -u root -e drop database if exists $db_name
 mysql -u root -e create database if not exists $db_name
 
+# If /root/.my.cnf exists then it won't ask for root password
+if [ -f /root/.my.cnf ]; then
+
+    mysql -e "DROP DATABASE IF EXISTS ${db_name};"
+    mysql -e "CREATE DATABASE IF NOT EXISTS ${db_name} /*\!40100 DEFAULT CHARACTER SET utf8 */;"
+    
+# If /root/.my.cnf doesn't exist then it'll ask for root password   
+else
+    echo "Please enter root user MySQL password!"
+    echo "Note: password will be hidden when typing"
+    read -sp rootpasswd
+    mysql -uroot -p${rootpasswd} -e "DROP DATABASE IF EXISTS ${db_name};"
+    mysql -uroot -p${rootpasswd} -e "CREATE DATABASE IF NOT EXISTS ${db_name} /*\!40100 DEFAULT CHARACTER SET utf8 */;"
+    
+fi
+
 # drop database $db_name; #Por guardar na variável
 # create database $db_name;
 # exit;
