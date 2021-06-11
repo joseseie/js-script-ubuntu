@@ -51,11 +51,11 @@ sudo git push
 
 # 3 - Restaurar o backup localmente
 # 3.1 - Fazer login no mysql
-sudo mysql -u root -p #or sudo mysql -u root //sem senha
+# sudo mysql -u root -p #or sudo mysql -u root //sem senha
 
 # 3.2 - Deletar a base de dados
-mysql -u root -e drop database if exists $db_name
-mysql -u root -e create database if not exists $db_name
+# mysql -u root -e drop database if exists $db_name
+# mysql -u root -e create database if not exists $db_name
 
 # If /root/.my.cnf exists then it won't ask for root password
 if [ -f /root/.my.cnf ]; then
