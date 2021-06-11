@@ -54,6 +54,9 @@ sudo git push
 sudo mysql -u root -p #or sudo mysql -u root //sem senha
 
 # 3.2 - Deletar a base de dados
+mysql -u root -e drop database if exists $db_name
+mysql -u root -e create database if not exists $db_name
+
 # drop database $db_name; #Por guardar na variável
 # create database $db_name;
 # exit;
