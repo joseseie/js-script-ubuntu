@@ -81,7 +81,7 @@ fi
 sudo unzip $backup_repo_path/e2Payments/$backup_file_to_restore -d /var/restore/ #Por guardar o file name na variável
 
 # 3.4 - Restauração(copia) do Storage:
-sudo rm -r $main_project_path/storage
+sudo rm $main_project_path/storage -R
 sudo cp -r /var/restore/$main_project_path/storage $main_project_path
 
 # 3.5 - Actualização das permissões do dir storage:
