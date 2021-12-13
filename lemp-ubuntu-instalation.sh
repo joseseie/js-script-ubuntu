@@ -31,7 +31,10 @@ sudo ufw enable;
 
 
 # Instalacao do mySql
-sudo apt install mysql-server-5.7;
+sudo apt install mysql-server;
+
+# Politica de definição de senha, isso permitirá que se defina a senha do root no fim.
+sudo mysql_secure_installation;
 
 # Instalacao do php
 sudo apt install php-fpm php-mysql;
@@ -39,7 +42,6 @@ sudo apt install php-fpm php-mysql;
 # Instalacao dos repositorios de terceiros,...
 sudo apt install software-properties-common;
 sudo add-apt-repository ppa:ondrej/php;
-sudo apt install python-software-properties;
 
 # Instalacao de php 7.4
 sudo apt update;
@@ -56,7 +58,6 @@ sudo apt install php8.0-fpm;
 
 sudo apt-get install php8.0-cli php8.0-fpm php8.0-curl php8.0-gd php8.0-mysql php8.0-mbstring zip unzip;
 
-sudo apt update;
 sudo apt -y install unzip zip php8.0 php8.0-mysql php8.0-fpm php8.0-mbstring php8.0-xml php8.0-curl php8.0-xml php-dev php-pear libmcrypt-dev;
 
 
