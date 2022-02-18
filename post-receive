@@ -1,0 +1,50 @@
+#!/bin/bash
+TARGET="/var/www/emazagame.explicador.co.mz/production"
+GIT_DIR="/var/bare-repos/emazagame.explicador.co.mz-production.git"
+
+# Colors
+red='\033[0;31m'
+green='\033[0;32m'
+yellow='\033[0;33m'
+no_color='\033[0m'
+
+while read oldrev newrev ref
+do
+        # Get brench name
+        BRANCH=$(echo "$ref" | cut -d/ -f3)
+
+        if [[ $ref =~ .*/master$ ]];
+        then
+
+                # only checking out the master (or anyother)
+                if git --work-tree=$TARGET --git-dir=$GIT_DIR checkout -f "$BRANCH"; then
+                        # Go to work-tree
+
+                        echo -e "\n${green}Deploying production server: e2payments.explicador.co.mz${no_color}\n"
+                        echo -e "\n${green}Intalling dependencies:${no_color}\n"
+                        cd "${TARGET}" && sudo composer install --no-interaction --ignore-platform-reqs
+
+                        echo -e "\n${green}Running migrations:${no_color}\n"
+                        php artisan migrate --force
+
+                        echo -e "\n${green}Cleaning cache:${no_color}\n"
+                        php artisan cache:clear
+                        php artisan config:clear
+                        
+                        sudo chmod 777 storage -R
+                        sudo chmod 777 boostrap -R
+
+                        # Restart
+                        echo -e "\n${green}Restarting nginx app${no_color}\n"
+                        sudo service nginx restart
+
+                        echo -e "\n${green}**********************************"
+                        echo -e "\nProduction server deployed on: emazagame.explicador.co.mz, successfully"
+                        echo -e "\n*********************************${no_color}"
+                else
+                        echo -e "\n${red}Ref $BRANCH successfully received.  Doing nothing: only the master branch may be deployed on this server.${no_color}"
+                fi
+        else
+                echo -e "\n${red}Ref $BRANCH successfully received.  Doing nothing: only the master branch may be deployed on this server.${no_color}"
+        fi
+done
