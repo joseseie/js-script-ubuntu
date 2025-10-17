@@ -74,6 +74,12 @@ sudo apt install php8.3-fpm php8.3-cli php8.3-curl php8.3-gd php8.3-mysql php8.3
 
 sudo apt -y install unzip zip php8.3 php8.3-mysql php8.3-fpm php8.3-mbstring php8.3-xml php8.3-curl php-dev php-pear libmcrypt-dev;
 
+# Instalacao de php 8.4
+sudo apt update;
+sudo apt install php8.4-fpm php8.4-cli php8.4-curl php8.4-gd php8.4-mysql php8.4-mbstring zip unzip;
+
+sudo apt -y install unzip zip php8.4 php8.4-mysql php8.4-fpm php8.4-mbstring php8.4-xml php8.4-curl php-dev php-pear libmcrypt-dev;
+
 # ====================================================
 # Definindo PHP 7.4 como default
 # ====================================================
