@@ -84,7 +84,7 @@ sudo apt -y install unzip zip php8.4 php8.4-mysql php8.4-fpm php8.4-mbstring php
 # Definindo PHP 7.4 como default
 # ====================================================
 
-sudo update-alternatives --set php /usr/bin/php7.4;
+sudo update-alternatives --set php /usr/bin/php8.3;
 
 # ====================================================
 # Instalacao do PHP myAdmin
